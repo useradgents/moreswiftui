@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Slab",
+        "repositoryURL": "https://bitbucket.org/useradgents/slab.git",
+        "state": {
+          "branch": null,
+          "revision": "814e94ac4b76dded50d97bb49c31b80383b66c72",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
