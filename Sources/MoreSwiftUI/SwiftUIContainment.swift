@@ -1,3 +1,5 @@
+#if !os(macOS)
+
 import SwiftUI
 import UIKit
 
@@ -16,3 +18,5 @@ public extension UIViewController {
         host.didMove(toParent: self)
     }
 }
+
+#endif

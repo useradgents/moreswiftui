@@ -1,3 +1,5 @@
+#if !os(macOS)
+
 import Foundation
 import Slab
 import Combine
@@ -113,3 +115,5 @@ public struct DownloadedImage<PlaceholderView: View, ErrorView: View>: View {
         }
     }
 }
+
+#endif

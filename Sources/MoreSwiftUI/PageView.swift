@@ -1,3 +1,5 @@
+#if !os(macOS)
+
 import SwiftUI
 import UIKit
 
@@ -108,3 +110,5 @@ class MagicHostingViewController<Content: View>: UIHostingController<Content> {
     
     override var prefersStatusBarHidden: Bool { true }
 }
+
+#endif

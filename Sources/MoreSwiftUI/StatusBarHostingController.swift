@@ -1,3 +1,5 @@
+#if !os(macOS)
+
 import Foundation
 import UIKit
 import SwiftUI
@@ -53,3 +55,5 @@ public class StatusBarHostingController<Content>: UIHostingController<Content> w
         super.init(coder: aDecoder)
     }
 }
+
+#endif

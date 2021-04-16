@@ -1,3 +1,5 @@
+#if !os(macOS)
+
 //
 //  Frost.swift
 //  https://gist.github.com/Clarko/8dbe26be36d4d317302791fceda7b30c
@@ -63,3 +65,5 @@ public struct Frost: UIViewRepresentable, Hashable {
         uiView.effect = UIBlurEffect(style: style)
     }
 }
+
+#endif
