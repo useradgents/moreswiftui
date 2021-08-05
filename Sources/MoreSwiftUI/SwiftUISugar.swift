@@ -86,4 +86,17 @@ public extension View {
             self
         }
     }
+    
+    @ViewBuilder
+    func ifLet<V, Transform: View, TransformElse: View>(
+        _ value: V?,
+        transform: (Self, V) -> Transform,
+        else elseTransform: (Self) -> TransformElse
+    ) -> some View {
+        if let value = value {
+            transform(self, value)
+        } else {
+            elseTransform(self)
+        }
+    }
 }
