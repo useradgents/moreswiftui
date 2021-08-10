@@ -9,11 +9,13 @@ public class ImageDownloader: ObservableObject {
     @Published public var path: URL?
     @Published public var error: Error?
     private let url: URL
+    private let verbose: Bool
     
     private var task: URLSessionDownloadTask?
     
-    public init(url: URL) {
+    public init(url: URL, verbose: Bool) {
         self.url = url
+        self.verbose = verbose
     }
     
     deinit {
@@ -34,13 +36,17 @@ public class ImageDownloader: ObservableObject {
             localPath = imageDir.appendingPathComponent(filename)
         }
         catch {
-            print("\(url.absoluteString) fail compute local path")
+            if self.verbose {
+                print("\(url.absoluteString) fail compute local path")
+            }
             self.error = URLError(.unknown)
             return
         }
         
         if FileManager.default.fileExists(atPath: localPath.path) {
-            print("\(url.absoluteString) is already downloaded at \(localPath.path)")
+            if self.verbose {
+                print("\(url.absoluteString) is already downloaded at \(localPath.path)")
+            }
             self.path = localPath
             return
         }
@@ -49,7 +55,9 @@ public class ImageDownloader: ObservableObject {
             
             if let e = error {
                 DispatchQueue.main.async {
-                    print("\(self.url.absoluteString) download error \(e.localizedDescription)")
+                    if self.verbose {
+                        print("\(self.url.absoluteString) download error \(e.localizedDescription)")
+                    }
                     self.error = e
                 }
                 return
@@ -57,7 +65,9 @@ public class ImageDownloader: ObservableObject {
             
             guard let p = path else {
                 DispatchQueue.main.async {
-                    print("\(self.url.absoluteString) no download path")
+                    if self.verbose {
+                        print("\(self.url.absoluteString) no download path")
+                    }
                     self.error = URLError(.unknown)
                 }
                 return
@@ -69,14 +79,18 @@ public class ImageDownloader: ObservableObject {
             }
             catch {
                 DispatchQueue.main.async {
-                    print("\(self.url.absoluteString) cannot move from \(p.path) to \(localPath.path)")
+                    if self.verbose {
+                        print("\(self.url.absoluteString) cannot move from \(p.path) to \(localPath.path)")
+                    }
                     self.error = URLError(.unknown)
                 }
                 return
             }
             
             DispatchQueue.main.async {
-                print("\(self.url.absoluteString) has been downloaded to \(localPath.path)")
+                if self.verbose {
+                    print("\(self.url.absoluteString) has been downloaded to \(localPath.path)")
+                }
                 self.path = localPath
             }
         })
@@ -94,10 +108,10 @@ public struct DownloadedImage<PlaceholderView: View, ErrorView: View>: View {
     private let placeholder: () -> PlaceholderView
     private let errorView: (Error) -> ErrorView
     
-    public init(url: URL, @ViewBuilder placeholder: @escaping () -> PlaceholderView, @ViewBuilder errorView: @escaping (Error) -> ErrorView) {
+    public init(url: URL, verbose: Bool = false, @ViewBuilder placeholder: @escaping () -> PlaceholderView, @ViewBuilder errorView: @escaping (Error) -> ErrorView) {
         self.placeholder = placeholder
         self.errorView = errorView
-        _downloader = StateObject(wrappedValue: ImageDownloader(url: url))
+        _downloader = StateObject(wrappedValue: ImageDownloader(url: url, verbose: verbose))
     }
     
     public var body: some View {
