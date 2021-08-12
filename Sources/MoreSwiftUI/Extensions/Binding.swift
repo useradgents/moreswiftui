@@ -1,6 +1,10 @@
 import SwiftUI
 
 public extension Binding {
+    static func get<T>(_ getter: @escaping () -> T) -> Binding<T> {
+        Binding<T>(get: getter, set: { _ in })
+    }
+    
     /// Promote a `Binding<Value?>` to a `Binding<Value>`, "securely"
     /// (quotation marks because once the initial unwrap has passed, all subsequent unwraps are assumed to succeed.)
     /// Use this in "child views", where the parent view decides to show the child based
