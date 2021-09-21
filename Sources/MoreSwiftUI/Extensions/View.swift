@@ -8,6 +8,7 @@ public extension View {
         return self
     }
     
+    /// Don't use this. It's bad.
     @ViewBuilder
     func `if`<Transform: View>(
         _ condition: Bool,
@@ -20,6 +21,7 @@ public extension View {
         }
     }
     
+    /// Don't use this. It's bad.
     @ViewBuilder
     func `if`<TrueContent: View, FalseContent: View>(
         _ condition: Bool,
@@ -33,6 +35,7 @@ public extension View {
         }
     }
     
+    /// Don't use this. It's bad.
     @ViewBuilder
     func ifLet<V, Transform: View>(
         _ value: V?,
@@ -45,6 +48,7 @@ public extension View {
         }
     }
     
+    /// Don't use this. It's bad.
     @ViewBuilder
     func ifLet<V, Transform: View, TransformElse: View>(
         _ value: V?,
