@@ -8,6 +8,14 @@ public extension View {
         return self
     }
     
+    func safeTopPadding() -> some View {
+        self.padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
+    }
+    
+    func safeBottomPadding() -> some View {
+        self.padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
+    }
+    
     /// Don't use this. It's bad.
     @ViewBuilder
     func `if`<Transform: View>(
