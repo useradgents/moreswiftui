@@ -15,4 +15,8 @@ public extension LocalizedStringKey.StringInterpolation {
             appendLiteral(result)
         }
     }
+    
+    public mutating func appendInterpolation(_ value: Date, using formatter: DateFormatter) {
+        appendLiteral(formatter.string(from: value))
+    }
 }
