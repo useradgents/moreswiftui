@@ -43,8 +43,49 @@ struct Rotated<Rotated: View>: View {
     }
 }
 
+struct Askew<Skewed: View>: View {
+    var view: Skewed
+    var angle: Angle
+    
+    init(_ view: Skewed, angle: Angle = .degrees(10)) {
+        self.view = view
+        self.angle = angle
+    }
+    
+    @State private var size: CGSize = .zero
+    
+    var body: some View {
+        let newFrame = CGRect(origin: .zero, size: size)
+            .offsetBy(dx: -size.width/2, dy: -size.height/2)
+            .applying(.skew(degrees: CGFloat(angle.degrees)))
+            .integral
+        
+        return view
+            .fixedSize()
+            .captureSize(in: $size)
+            .transformEffect(.skew(degrees: CGFloat(angle.degrees)))
+            .transformEffect(.init(translationX: newFrame.height * tan(angle.radians) / 2, y: 0))
+            .frame(width: newFrame.width, height: newFrame.height)
+    }
+    
+    
+}
+
 extension View {
     public func rotated(_ angle: Angle) -> some View {
         Rotated(self, angle: angle)
+    }
+    
+    public func askew(_ angle: Angle) -> some View {
+        Askew(self, angle: angle)
+    }
+}
+
+
+extension CGAffineTransform {
+    static func skew(degrees: CGFloat) -> CGAffineTransform {
+        var t = CGAffineTransform.identity
+        t.c = tan(-degrees * CGFloat.pi / 180)
+        return t
     }
 }
