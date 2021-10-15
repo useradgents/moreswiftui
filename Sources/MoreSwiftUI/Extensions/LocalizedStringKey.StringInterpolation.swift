@@ -10,7 +10,29 @@ public extension LocalizedStringKey.StringInterpolation {
         appendInterpolation(value, using: NumberFormatter.euros)
     }
     
+    mutating func appendInterpolation(euros value: Decimal) {
+        appendInterpolation(value, using: NumberFormatter.euros)
+    }
+    
     mutating func appendInterpolation(_ value: Double, using formater: NumberFormatter) {
+        if let result = formater.string(from: NSNumber(value: value)) {
+            appendLiteral(result)
+        }
+    }
+    
+    mutating func appendInterpolation(_ value: Float, using formater: NumberFormatter) {
+        if let result = formater.string(from: NSNumber(value: value)) {
+            appendLiteral(result)
+        }
+    }
+    
+    mutating func appendInterpolation(_ value: Decimal, using formater: NumberFormatter) {
+        if let result = formater.string(from: value as NSNumber) {
+            appendLiteral(result)
+        }
+    }
+    
+    mutating func appendInterpolation(_ value: Int, using formater: NumberFormatter) {
         if let result = formater.string(from: NSNumber(value: value)) {
             appendLiteral(result)
         }
