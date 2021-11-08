@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "MoreSwiftUI", targets: ["MoreSwiftUI"])
     ],
     dependencies: [
-        .package(name: "Slab", url: "https://bitbucket.org/useradgents/slab.git", .branch("main"))
+        .package(name: "Slab", url: "https://github.com/useradgents/slab.git", .branch("main"))
     ],
     targets: [
         .target(

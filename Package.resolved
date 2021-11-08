@@ -30,10 +30,10 @@
       },
       {
         "package": "Slab",
-        "repositoryURL": "https://bitbucket.org/useradgents/slab.git",
+        "repositoryURL": "https://github.com/useradgents/slab.git",
         "state": {
           "branch": "main",
-          "revision": "a4e7bbe80838531d4c9d447041a6dfb736b7fcbd",
+          "revision": "9e85dd6f0582513d1cf51a7b9461889d231483fc",
           "version": null
         }
       }
