@@ -5,6 +5,8 @@
 //  Created by Guillaume Audinet on 27/08/2021.
 //
 
+#if os(iOS)
+
 import SwiftUI
 import WebKit
 
@@ -228,3 +230,5 @@ extension WebViewWrapper.Coordinator: WKNavigationDelegate {
         }
     }
 }
+
+#endif

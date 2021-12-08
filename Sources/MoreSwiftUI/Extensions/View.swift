@@ -2,18 +2,10 @@ import SwiftUI
 
 public extension View {
     func log(_ value: Any) -> some View {
-#if DEBUG
+        #if DEBUG
         print(value)
-#endif
+        #endif
         return self
-    }
-    
-    func safeTopPadding() -> some View {
-        self.padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
-    }
-    
-    func safeBottomPadding() -> some View {
-        self.padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
     }
     
     /// Don't use this. It's bad.
@@ -70,3 +62,15 @@ public extension View {
         }
     }
 }
+
+#if canImport(UIKit)
+public extension View {
+    func safeTopPadding() -> some View {
+        self.padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
+    }
+    
+    func safeBottomPadding() -> some View {
+        self.padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
+    }
+}
+#endif
