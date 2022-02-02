@@ -9,14 +9,12 @@ let package = Package(
         .library(name: "MoreSwiftUI", targets: ["MoreSwiftUI"])
     ],
     dependencies: [
-        .package(name: "Slab", url: "https://github.com/useradgents/slab.git", .branch("main"))
+        .package(name: "Slab", url: "https://github.com/useradgents/slab.git", from: "1.3.0")
     ],
     targets: [
         .target(
             name: "MoreSwiftUI",
-            dependencies: [
-                .product(name: "Slab", package: "Slab")
-            ]
+            dependencies: ["Slab"]
         ),
         .testTarget(name: "MoreSwiftUITests", dependencies: ["MoreSwiftUI"]
         )
