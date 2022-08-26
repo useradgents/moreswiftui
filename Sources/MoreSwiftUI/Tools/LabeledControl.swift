@@ -10,11 +10,14 @@ public struct LabeledControl<L: View, C: View>: View {
         self.contents = contents
     }
     
-    @State private var frame = CGRect.zero
+    @State private var wholeFrame = CGRect.zero
+    @State private var contentFrame = CGRect.zero
     public var body: some View {
         HStack {
             label()
-            contents().measureLocalFrame(into: $frame)
-        }.alignmentGuide(.leading, computeValue: { $0.width - frame.width })
+            contents().labelsHidden().measureLocalFrame(into: $contentFrame)
+        }
+        .measureLocalFrame(into: $wholeFrame)
+        .alignmentGuide(.leading, computeValue: { _ in wholeFrame.width - contentFrame.width })
     }
 }
