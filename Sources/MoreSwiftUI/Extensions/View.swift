@@ -61,6 +61,13 @@ public extension View {
             elseTransform(self)
         }
     }
+    
+    func emptyNavigationBar() -> some View {
+        navigationTitle("")
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .ignoresSafeArea()
+    }
 }
 
 #if canImport(UIKit)
@@ -71,31 +78,6 @@ public extension View {
     
     func safeBottomPadding() -> some View {
         self.padding(.bottom, UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0)
-    }
-    
-    func bottomInsets() -> CGFloat {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first
-        else {
-            return 0
-        }
-        return window.safeAreaInsets.bottom
-    }
-
-    func topInsets() -> CGFloat {
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-              let window = windowScene.windows.first
-        else {
-            return 0
-        }
-        return window.safeAreaInsets.top
-    }
-
-    func emptyNavigationBar() -> some View {
-        navigationTitle("")
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            .ignoresSafeArea()
     }
 }
 #endif
