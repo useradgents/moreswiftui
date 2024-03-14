@@ -61,6 +61,13 @@ public extension View {
             elseTransform(self)
         }
     }
+    
+    func emptyNavigationBar() -> some View {
+        navigationTitle("")
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .ignoresSafeArea()
+    }
 }
 
 #if canImport(UIKit)
